@@ -1,0 +1,110 @@
+<app-nav></app-nav>
+<main class="cs-page-wrapper">
+    <!-- Breadcrumb -->
+    <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                    <a [routerLink]="['/']"><i class="cxi-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Mi perfil</li>
+            </ol>
+        </div>
+    </nav>
+    <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+
+            <!-- Account menu (sticky sidebar) -->
+            <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
+                <app-sidebar></app-sidebar>
+            </aside>
+
+            <!-- Content -->
+            <div class="col-lg-8 ml-auto">
+                <div class="d-flex align-items-center justify-content-between mb-4 pb-1 pb-sm-3">
+                    <h1 class="h2 mb-0">Mi perfil</h1>
+
+                </div>
+
+
+
+                <form #actualizarForm="ngForm" (ngSubmit)="actualizar(actualizarForm)" *ngIf="!cargando">
+                    <div class="row pb-3">
+                        <div class="col-sm-6 form-group">
+                            <label for="ac-fn">Nombres</label>
+                            <input type="text" required class="form-control form-control-lg" value="Annette" name="nombres" [(ngModel)]="cliente.nombres" placeholder="Nombres completos">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="ac-ln">Apellidos</label>
+                            <input type="text" required class="form-control form-control-lg" value="Black" name="apellidos" [(ngModel)]="cliente.apellidos" placeholder="Apellidos completos">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="ac-email">Email</label>
+                            <input type="email" required class="form-control form-control-lg" placeholder="ann.black@example.com" value="{{cliente.email}}" readonly>
+                        </div>
+                        <!-- La contraseña no se carga en el input, estará en blanco para introducir una nueva
+                         -->
+                        <div class="col-sm-6 form-group">
+                            <label for="ac-phone">Password</label>
+                            <input type="password" class="form-control form-control-lg" placeholder="Nueva contraseña" id="input_password">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="ac-phone">Teléfono</label>
+                            <input type="number" required class="form-control form-control-lg" placeholder="646085076" name="telefono" [(ngModel)]=" cliente.telefono">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="ac-phone">Fecha de nacimiento</label>
+                            <input type="date" required class="form-control form-control-lg" name="f_nacimiento" [(ngModel)]=" cliente.f_nacimiento">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="ac-phone">DNI</label>
+                            <input type="text" required class="form-control form-control-lg" placeholder="08645129K" name="dni" [(ngModel)]="cliente.dni">
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                            <label for="ac-country">Género</label>
+                            <select id="ac-country" required class="custom-select custom-select-lg" name="genero" [(ngModel)]="cliente.genero">
+                              <option value="" disabled>Seleccionar</option>
+                              <option value="masculino">Masculino</option>
+                              <option value="femenino">Femenino</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="ac-city">País</label>
+                            <select id="ac-city" required class="custom-select custom-select-lg" name="pais" [(ngModel)]="cliente.pais">
+                                  <option value="" selected disabled>Seleccionar</option>
+                                  <option value="Argentina">Argentina</option>
+                                  <option value="Cuba">Cuba</option>
+                                  <option value="España">España</option>
+                                  <option value="Francia">Francia</option>
+                                  <option value="Portugal" >Portugal</option>
+
+                     </select>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">&nbsp;Actualizar perfil&nbsp;</button>
+                </form>
+
+                <ng-container *ngIf="cargando">
+                    <div class="col-12">
+                        <div class="alert alert-info text-center" role="alert">
+                            <div class="cs-page-loading active">
+                                <div class="cs-page-loading-inner">
+                                    <div class="cs-page-spinner"></div><span>Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+            </div>
+        </div>
+    </section>
+
+
+</main>
+
+<app-footer></app-footer>
