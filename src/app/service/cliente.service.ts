@@ -87,4 +87,16 @@ validarToken():boolean{
   return this._http.put(`${this.url}/update_cliente_perfil/${data._id}`, data , this.headers)
 
  }
+
+ obtener_config_public( ){
+
+  return this._http.get(`${this.url}/obtener_config_public`, this.headers)
+
+ }
+
+ listar_productos_publico(filtro: any  ){
+
+  return this._http.get(`${this.url}/listar_productos_publico/` + filtro, this.headers)
+
+ }
 }

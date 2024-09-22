@@ -13,12 +13,14 @@ export class NavComponent {
   public cliente: any = undefined;
   public cliente_sesion: any = {};
   public token;
+  public config_global : any= {};
 
   constructor(private _clienteService: ClienteService, private _router: Router){
 
        this.id = localStorage.getItem('_id');
        this.token = localStorage.getItem('token');
 
+       this.init_data_tienda();
 
        if ( this.token) {
 
@@ -39,22 +41,40 @@ export class NavComponent {
 
              this.cliente_sesion = JSON.parse(this.cliente_sesion);
 
-           //  console.log(this.cliente_sesion);
 
             }else{
                this.cliente_sesion = undefined;
+
             }
 
 
            },
            err=>{
              console.log(err);
-             this.cliente = undefined;
+             this.cliente_sesion = undefined;
+
+
            }
          )
-       }
+       }else{
+        this.cliente_sesion = undefined;
+              }
+
+
   }
 
+
+  init_data_tienda(){
+    //información de la tienda
+    this._clienteService.obtener_config_public().subscribe(
+     (resp:any)=>{
+       this.config_global = resp.data
+      // console.log(this.config_global);
+     },err=>{
+        console.log(err);
+     }
+   )
+}
   logout(){
     //window.location.reload();
     localStorage.clear();

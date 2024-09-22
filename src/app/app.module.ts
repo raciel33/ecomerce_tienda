@@ -14,6 +14,9 @@ import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { SidebarComponent } from './components/usuario/sidebar/sidebar.component';
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,8 @@ import { IndexProductoComponent } from './components/productos/index-producto/in
     BrowserModule,
     routing,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
