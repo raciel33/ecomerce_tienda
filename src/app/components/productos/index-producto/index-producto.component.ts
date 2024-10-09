@@ -3,9 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/service/cliente.service';
 import { GLOBAL } from 'src/app/service/GLOBAL';
 
+import { io } from "socket.io-client";
 
 declare var noUiSlider:any;
 declare var $: any
+declare var iziToast: any;
 
 @Component({
   selector: 'app-index-producto',
@@ -41,15 +43,24 @@ export class IndexProductoComponent implements OnInit {
   //ordenar productos
   public sort_by= 'Defecto';
 
+  public carrito_data: any = {
+    variedad:'',
+    cantidad : 1
+  }
+
+  public load_btn = false;
+
+  public socket = io('http://localhost:3005')
 
 
-  constructor( private _clienteService: ClienteService, private _router: ActivatedRoute){
 
-    this.url = GLOBAL.url
+  constructor( private _clienteService: ClienteService, private _router: ActivatedRoute, private _clienteServices: ClienteService){
 
-   this.init_data_tienda();
+        this.url = GLOBAL.url
 
-   this.lista_productos();
+       this.init_data_tienda();
+
+       this.lista_productos();
 
 /**NOTA: En el navbar podemos seleccionar productos por categoria ,hay una ruta :
 'productos/categoria/:categoria' donde se le pasa desde el navbar la categoria por parametro
@@ -73,7 +84,7 @@ para que el index.producto la capte y muestre los productos por dicha categoria
 
                this.cargando = false;
           },
-          err=>{
+          (          err: any)=>{
 
           }
         )
@@ -121,6 +132,8 @@ para que el index.producto la capte y muestre los productos por dicha categoria
 
 
   ngOnInit(): void {
+
+
     //-----------BARRA DE PRECIO QUE SE MUESTRA EN EL ASIDE--------------
           //elemento slider
         var slider : any = document.getElementById('slider');
@@ -284,5 +297,70 @@ else if(this.sort_by == 'zaTitulo'){
           )
             }
   }
+
+
+  agregarProducto(producto: any){
+
+    if (this.carrito_data.cantidad <= producto.stock) {
+
+      let data = {
+        producto: producto._id,
+        cliente : localStorage.getItem('_id'),
+        cantidad: 1,
+        variedad: producto.variedades[0].titulo,
+      }
+      this.load_btn = true
+
+   this._clienteServices.agregar_carrito_cliente( data ).subscribe(
+    (resp:any)=>{
+
+       if (resp.data == undefined) {
+        iziToast.show({
+          title:'ERROR',
+          titleColor:'#ff0000',
+          class: 'text-danger',
+          position: 'topRight',
+          message: 'EL producto ya existe en el carrito'
+      })
+      this.load_btn = false
+
+       }
+       else{
+
+         iziToast.show({
+          title:'OK',
+          titleColor:'#0D922A',
+          class: 'text-success',
+          position: 'topRight',
+          message: 'Producto añadido'
+        })
+
+        console.log(resp);
+
+        //comunicacion con sockest para que se añada en realtime( componente receptor nav.component.ts)
+        this.socket.emit('add-carrito',{ data:true});
+
+        this.load_btn = false
+       }
+
+
+    },
+    err=>{
+console.log(err);
+    }
+   )
+
+
+    }else{
+      iziToast.show({
+        title:'ERROR',
+        titleColor:'#ff0000',
+        class: 'text-danger',
+        position: 'topRight',
+        message: 'Solo quedan ' + producto.stock + ' en stock'
+    })
+    }
+  }
+
 
 }

@@ -98,5 +98,37 @@ validarToken():boolean{
 
   return this._http.get(`${this.url}/listar_productos_publico/` + filtro, this.headers)
 
- }
 }
+
+detalle_producto_publico(data: any  ){
+
+  return this._http.post(`${this.url}/detalle_producto_publico/` , data, this.headers)
+
+}
+
+
+agregar_carrito_cliente(data: any  ){
+
+  return this._http.post(`${this.url}/agregar_carrito_cliente/` , data, this.headers)
+
+}
+
+get_carrito_cliente(id: any  ){
+
+  return this._http.get(`${this.url}/get_carrito_cliente/`+ id , this.headers)
+
+}
+//
+delete_carrito_cliente(id: any  ){
+
+  return this._http.delete(`${this.url}/delete_carrito_cliente/`+ id , this.headers)
+
+}
+
+registro_direccion_cliente(data: any  ){
+
+  return this._http.post(`${this.url}/registro_direccion_cliente/`, data , this.headers)
+
+}
+}
+//registro_direccion_cliente

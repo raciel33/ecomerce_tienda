@@ -14,7 +14,10 @@ import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { SidebarComponent } from './components/usuario/sidebar/sidebar.component';
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import {NgxPaginationModule} from 'ngx-pagination';
+import { DetailProductoComponent } from './components/productos/detail-producto/detail-producto.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
+import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component'; // <-- import the module
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
     LoginComponent,
     PerfilComponent,
     SidebarComponent,
-    IndexProductoComponent
+    IndexProductoComponent,
+    DetailProductoComponent,
+    CarritoComponent,
+    DireccionesComponent
   ],
   imports: [
     BrowserModule,
