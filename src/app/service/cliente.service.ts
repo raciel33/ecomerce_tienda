@@ -130,5 +130,20 @@ registro_direccion_cliente(data: any  ){
   return this._http.post(`${this.url}/registro_direccion_cliente/`, data , this.headers)
 
 }
+listar_direccion_cliente(id: any  ){
+
+  return this._http.get(`${this.url}/listar_direccion_cliente/`+id , this.headers)
+
 }
-//registro_direccion_cliente
+cambiar_direccion_principal(id: any , cliente_id: any ){
+
+  return this._http.put(`${this.url}/cambiar_direccion_principal/`+id + '/'+ cliente_id,{data:true}, this.headers)
+
+}
+borrar_direccion(id: any  ){
+
+  return this._http.delete(`${this.url}/borrar_direccion/`+id + '/', this.headers)
+
+}
+}
+//
