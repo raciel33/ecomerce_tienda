@@ -35,7 +35,7 @@
         .pagination {
             margin-bottom: 0px;
         }
-        
+
         .cs-page-loading {
             position: fixed;
             top: 0;
@@ -51,12 +51,12 @@
             visibility: hidden;
             z-index: 9999;
         }
-        
+
         .cs-page-loading.active {
             opacity: 1;
             visibility: visible;
         }
-        
+
         .cs-page-loading-inner {
             position: absolute;
             top: 50%;
@@ -69,18 +69,18 @@
             transition: opacity .2s ease-in-out;
             opacity: 0;
         }
-        
+
         .cs-page-loading.active>.cs-page-loading-inner {
             opacity: 1;
         }
-        
+
         .cs-page-loading-inner>span {
             display: block;
             font-size: 1rem;
             font-weight: normal;
             color: #787a80;
         }
-        
+
         .cs-page-spinner {
             display: inline-block;
             width: 2.75rem;
@@ -93,7 +93,7 @@
             -webkit-animation: spinner .75s linear infinite;
             animation: spinner .75s linear infinite;
         }
-        
+
         @-webkit-keyframes spinner {
             0% {
                 -webkit-transform: scale(0);
@@ -105,7 +105,7 @@
                 transform: none;
             }
         }
-        
+
         @keyframes spinner {
             0% {
                 -webkit-transform: scale(0);
@@ -140,7 +140,7 @@
             right: 1rem;
             z-index: 100;
         }
-        
+
         .cs-demo-switcher-inner {
             width: 3rem;
             height: 3rem;
@@ -166,7 +166,7 @@
             box-shadow: none !important;
             background-color: #17696a !important;
         }
-        
+
         .cs-range-slider-ui {
             height: .125rem !important;
             margin: 3rem 0 !important;
@@ -207,12 +207,23 @@
     <script src="assets/js/nouislider.min.js"></script>
     <script src="assets/js/smooth-scroll.polyfills.min.js"></script>
 
+    <!-- Tarjetas de crédifo -->
+
+    <script src="assets/js/cleave.min.js"></script>
+    <script src="assets/js/sticky-sidebar.min.js"></script>
+
+
 
     <!-- Main theme script-->
     <script src="assets/js/theme.min.js"></script>
     <script src="assets/js/iziToast.min.js"></script>
     <script src="assets/vendor/lightgallery.js/dist/js/lightgallery.min.js"></script>
 
+    <!-- paypal -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AdMSmPF7uYLhx2gyWQHVROMgES2tIrtn7rQDf4qUxRe5Wge-ZLoJGBfclVgJ8oYGiJbNs1x9rGhV8QXA"></script>
+
+    <!-- stripe(pagos con tarjeta) -->
+    <script src="https://js.stripe.com/v3/"></script>
 
 </body>
 

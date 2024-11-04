@@ -141,6 +141,7 @@ get_carrito_cliente(){
 
   //precio total del carrito
   calcular_carrito(){
+    this.subtotal = 0;
     this.carrito.forEach(element=>{
 
       this.subtotal = this.subtotal + parseInt(element.producto.precio);
@@ -161,7 +162,9 @@ get_carrito_cliente(){
         })
 
         this.socket.emit('delete-carrito', { data: resp.data})
-        console.log(resp);
+       // console.log(resp);
+
+       this.get_carrito_cliente();
       }, err=>{
 
       }

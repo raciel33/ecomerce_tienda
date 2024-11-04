@@ -49,4 +49,9 @@ export class GuestService {
   get_poblaciones( ){
       return this._http.get('./assets/poblaciones.json')
     }
+
+      //poblaciones referencia a los envios
+  get_envios( ){
+    return this._http.get('./assets/envios.json')
+  }
 }

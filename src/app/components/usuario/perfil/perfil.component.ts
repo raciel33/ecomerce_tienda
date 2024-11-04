@@ -74,7 +74,7 @@ init_data_perfil(){
           }
         )
     }else{
-      iziToast.show({
+     iziToast.show({
         title:'ERROR',
         titleColor:'#ff0000',
         class: 'text-danger',

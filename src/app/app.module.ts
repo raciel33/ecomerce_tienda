@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -17,7 +17,9 @@ import { IndexProductoComponent } from './components/productos/index-producto/in
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DetailProductoComponent } from './components/productos/detail-producto/detail-producto.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
-import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component'; // <-- import the module
+import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import {  NgxStripeModule } from 'ngx-stripe';
 
 
 @NgModule({
@@ -32,14 +34,19 @@ import { DireccionesComponent } from './components/usuario/direcciones/direccion
     IndexProductoComponent,
     DetailProductoComponent,
     CarritoComponent,
-    DireccionesComponent
+    DireccionesComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
     routing,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ReactiveFormsModule,
+    NgxStripeModule.forRoot('pk_test_51QC60CKzje4IjR2rrNmHOmapYwSRSzgT5q8qGZF7wQQS7RrxQsNV88beMhuEwanShqRI0GPKBvdazqNUQemy1zyI00MHLttpDL')
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

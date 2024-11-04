@@ -145,5 +145,36 @@ borrar_direccion(id: any  ){
   return this._http.delete(`${this.url}/borrar_direccion/`+id + '/', this.headers)
 
 }
+
+get_direccion_principal(id: any  ){
+
+  return this._http.get(`${this.url}/get_direccion_principal/`+id + '/', this.headers)
+
+}
+
+registro_compra_cliente(data: any  ){
+
+  return this._http.post(`${this.url}/registro_compra_cliente/`, data , this.headers)
+
+}
+
+//pagos
+//realizar_pago_tarjeta
+
+realizar_pago_tarjeta( ){
+
+  return this._http.post(`/create-checkout-session/` , this.headers)
+
+}
+
+envio_correo_compra_cliente( id: any){
+  return this._http.get(`${this.url}/envio_correo_compra_cliente/`+id , this.headers)
+
+}
+
+validarCupon( cupon: any){
+  return this._http.get(`${this.url}/validarCupon/`+cupon , this.headers)
+
+}
 }
 //
