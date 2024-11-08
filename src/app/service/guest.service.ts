@@ -54,4 +54,13 @@ export class GuestService {
   get_envios( ){
     return this._http.get('./assets/envios.json')
   }
+
+
+  obtener_descuento_activo(){
+
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+
+       return this._http.get(`${this.url}/obtener_descuento_activo/` , {headers: headers})
+
+     }
 }

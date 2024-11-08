@@ -50,7 +50,9 @@ export class CarritoComponent implements OnInit {
   public detail_venta:Array<any> =[];
 
   public err_cupon = '';
-  public descuento = 0;
+  public descuento: any = undefined;
+
+  public desc_cupon = 0;
 
 
   //Pago con tarjeta stripe------------------------------------
@@ -242,8 +244,27 @@ export class CarritoComponent implements OnInit {
      )
 
     })
-//pago con tarjeta conectado a stripe
+    //obtener los descuentos activos que hay en la tienda
+    this._guestService.obtener_descuento_activo().subscribe(
+      (resp:any)=>{
+        if (resp.data != undefined) {
+          this.descuento = resp.data[0]
+          console.log(this.descuento);
+
+        } else {
+          this.descuento = undefined
+        }
+      },
+      err=>{
+
+      }
+    )
+
   }
+
+
+  //pago con tarjeta conectado a stripe
+
 createForm(){
 
   this.stripeForm = this.fb.group({
@@ -379,22 +400,35 @@ buy() {
 
   //se calcula el importe del carrito
   calcular_carrito(){
-
     this.subtotal = 0;
+    if( this.descuento == undefined){
 
-    //se reccorre el array carrito y se suma cada iteracion de element.producto.precio
-    this.carrito.forEach(element=>{
+      this.carrito.forEach(element=>{
 
-      this.subtotal = this.subtotal + parseInt(element.producto.precio);
+        this.subtotal = this.subtotal + parseInt(element.producto.precio);
+      }
+      )
     }
-    );
-    this.totalPagar = this.subtotal;
+    //si hay descuento
+    else if( this.descuento != undefined){
 
+      this.carrito.forEach(element=>{
+
+        //parseInt(element.producto.precio)*this.descuento.descuento)/100 --> calculo del porcentaje del descuento
+
+        let precio_con_descuento = Math.round(parseInt(element.producto.precio) - ( parseInt(element.producto.precio)*this.descuento.descuento)/100)
+
+        this.subtotal = this.subtotal + precio_con_descuento;
+      }
+      )
+    }
   }
+
 //------------------------------------------------------
 
   //calcula el importe del carrito + el coste del envío
   calcular_total( envio_titulo: any ){
+
 
     this.totalPagar = this.subtotal + parseInt(this.precio_envio);
 
@@ -478,13 +512,13 @@ validar_cupon(){
 
             if ( resp.data.tipo == 'Valor fijo') {
 
-              this.descuento = resp.data.valor;
-              this.totalPagar = this.totalPagar - this.descuento;
+              this.desc_cupon = resp.data.valor;
+              this.totalPagar = this.totalPagar - this.desc_cupon;
             }
             else if(  resp.data.tipo == 'Porcentaje' ){
 
-              this.descuento = (this.totalPagar *  resp.data.valor)/100;
-              this.totalPagar = this.totalPagar - this.descuento;
+              this.desc_cupon = (this.totalPagar *  resp.data.valor)/100;
+              this.totalPagar = this.totalPagar - this.desc_cupon;
             }
 
 

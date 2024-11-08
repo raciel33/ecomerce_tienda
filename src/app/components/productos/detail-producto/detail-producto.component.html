@@ -15,6 +15,14 @@
             </ol>
         </div>
     </nav>
+    <section class="container pt-3 pb-5 pb-md-6 mb-2 mb-lg-0">
+
+        <div class="row mb-5" *ngIf="descuento!=undefined">
+            <div class="col-12">
+                <img [src]=" url + '/get_img_banner_descuento/'+ descuento.banner" style="width: 100% !important;">
+            </div>
+        </div>
+    </section>
     <!-- Page title -->
     <section class="container d-md-flex align-items-center justify-content-between py-3 py-md-4 mb-3">
         <h1 class="mb-2 mb-md-0">{{producto.titulo}}</h1>
@@ -52,10 +60,13 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
                     <!-- Price -->
-                    <div class="d-flex align-items-center mb-sm-0 mb-4">
-                        <span class="h3 d-inline-block mb-0 text-danger">{{producto.precio}}€</span>
-                        <del class="d-inline-block ml-2 pl-1 font-size-lg text-muted">$31.00</del>
-                        <span class="ml-4 p-2 badge badge-danger font-size-base font-weight-bold">- 50%</span>
+                    <div class="d-flex align-items-center mb-sm-0 mb-4" *ngIf="descuento != undefined">
+                        <span class="h3 d-inline-block mb-0 text-danger">{{producto.precio | descuentos:descuento.descuento}}€</span>
+                        <del class="d-inline-block ml-2 pl-1 font-size-lg text-muted">{{producto.precio}}€</del>
+                        <span class="ml-4 p-2 badge badge-danger font-size-base font-weight-bold" *ngIf="descuento != undefined">- {{descuento.descuento}}%</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-sm-0 mb-4" *ngIf="descuento == undefined">
+                        <span class="h3 d-inline-block mb-0 ">{{producto.precio}}€</span>
                     </div>
 
                     <!-- Rating -->
@@ -283,11 +294,16 @@
                             <h3 class="card-product-title text-truncate mb-2 ">
                                 <a href="# " class="nav-link ">{{producto.titulo}}</a>
                             </h3>
-                            <div class="d-flex align-items-center mb-3 ">
-                                <span class="h5 d-inline-block text-danger mb-0 ">{{producto.precio}}€</span>
-                                <del class="d-inline-block ml-2 pl-1 text-muted ">$31.00</del>
+                            <!-- si no hay descuento aparece el precio original -->
+                            <div class="d-flex align-items-center mb-3" *ngIf="descuento == undefined">
+                                <span class="h5 d-inline-block mb-0">{{producto.precio}}€</span>
                             </div>
-
+                            <!-- si  hay descuento  -->
+                            <div class="d-flex align-items-center mb-3" *ngIf="descuento != undefined">
+                                <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
+                                <span class="h5 d-inline-block mb-0 text-danger">{{producto.precio | descuentos:descuento.descuento}}€</span>
+                                <del class="d-inline-block ms-2 ps-1 text-muted">{{producto.precio}}€</del>
+                            </div>
                             <button type="button " class="btn btn-primary btn-block " style="margin-bottom: 1rem;">
                   <i class="cxi-cart align-middle mt-n1 mr-2 "></i>
                   Al carrito
@@ -582,9 +598,15 @@
                         <h3 class="card-product-title text-truncate mb-2 ">
                             <a href="# " class="nav-link ">{{producto.titulo}}</a>
                         </h3>
-                        <div class="d-flex align-items-center mb-3 ">
-                            <span class="h5 d-inline-block text-danger mb-0 ">{{producto.precio}}€</span>
-                            <del class="d-inline-block ml-2 pl-1 text-muted ">$31.00</del>
+                        <!-- si no hay descuento aparece el precio original -->
+                        <div class="d-flex align-items-center mb-3" *ngIf="descuento == undefined">
+                            <span class="h5 d-inline-block mb-0">{{producto.precio}}€</span>
+                        </div>
+                        <!-- si  hay descuento  -->
+                        <div class="d-flex align-items-center mb-3" *ngIf="descuento != undefined">
+                            <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
+                            <span class="h5 d-inline-block mb-0 text-danger">{{producto.precio | descuentos:descuento.descuento}}€</span>
+                            <del class="d-inline-block ms-2 ps-1 text-muted">{{producto.precio}}€</del>
                         </div>
 
                         <button type="button " class="btn btn-primary btn-block " style="margin-bottom: 1rem;">

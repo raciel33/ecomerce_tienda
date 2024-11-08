@@ -215,11 +215,17 @@
                             <li class="mb-0"><span class="text-muted">{{item.producto.titulo_variedad}}:</span> {{item.variedad}}</li>
                             <li class="mb-0"><span class="text-muted">Size:</span> S</li>
                         </ul>
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center" *ngIf="descuento == undefined">
                             <input type="number" class="form-control form-control-sm bg-light mr-3" readonly style="width: 4.5rem;" value="{{item.cantidad}}">
                             <div class="text-nowrap">
                                 <!-- <strong class="text-danger"></strong>  -->
                                 <span class="font-size-xs text-muted" style="font-size: 1.3rem !important;">{{item.producto.precio}}€</span></div>
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="descuento != undefined">
+                            <input type="number" class="form-control form-control-sm bg-light mr-3" readonly style="width: 4.5rem;" value="{{item.cantidad}}">
+                            <div class="text-nowrap">
+                                <!-- <strong class="text-danger"></strong>  -->
+                                <span class="font-size-xs text-muted" style="font-size: 1.3rem !important;">{{ item.producto.precio | descuentos: descuento.descuento}}€</span></div>
                         </div>
                         <button class="btn btn-link btn-sm text-decoration-none px-0 pb-0">
 Mover a              <i class="cxi-heart ml-1"></i>

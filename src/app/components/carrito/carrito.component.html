@@ -57,11 +57,23 @@
                                 <ul class="list-unstyled font-size-xs mt-n2 mb-2">
                                     <li class="mb-0"><span class="text-muted">{{item.producto.titulo_variedad}}:</span> {{item.variedad}}</li>
                                 </ul>
-                                <div class="d-flex pr-sm-3">
+                                <div class="d-flex pr-sm-3" *ngIf="descuento != undefined">
                                     <input type="number" class="form-control form-control-sm bg-light mr-3" readonly style="width: 4.5rem;" value="{{item.cantidad}}">
                                     <div class="text-nowrap pt-2">
-                                        <!-- <strong>$18.15</strong> -->
-                                        <span class="font-size-xs text-muted" style="font-size: 1.3rem !important;">{{item.producto.precio}}€</span>
+
+                                        <strong class="text-danger mr-1" style="font-size: 1.3rem !important;" *ngIf="descuento != undefined">{{item.producto.precio | descuentos: descuento.descuento }}€</strong>
+
+                                        <span class="font-size-xs text-muted" style="text-decoration: line-through;">{{item.producto.precio }}€</span>
+
+                                    </div>
+                                </div>
+                                <div class="d-flex pr-sm-3" *ngIf="descuento == undefined">
+                                    <input type="number" class="form-control form-control-sm bg-light mr-3" readonly style="width: 4.5rem;" value="{{item.cantidad}}">
+                                    <div class="text-nowrap pt-2">
+
+
+                                        <span style="font-size: 1.3rem !important;">{{item.producto.precio }}€</span>
+
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center flex-sm-column text-sm-center ml-sm-auto pt-3 pt-sm-0">
@@ -268,14 +280,16 @@
                                     <span>{{precio_envio}}€</span>
                                 </li>
                                 <li class="d-flex justify-content-between mb-2">
-                                    <span>Descuentos:</span>
-                                    <span class="text-danger">- {{descuento}}€</span>
+                                    <span>Descuento del cupón:</span>
+                                    <span class="text-danger">- {{desc_cupon}}€</span>
                                 </li>
 
                             </ul>
                             <div class="d-flex justify-content-between p-4">
                                 <span class="h5 mb-0">Total a pagar :</span>
-                                <span class="h5 mb-0">{{ totalPagar }}€</span>
+                                <span class="h5 mb-0" *ngIf="descuento != undefined">{{ totalPagar }}€</span>
+                                <span class="h5 mb-0" *ngIf="descuento == undefined">{{ totalPagar }}€</span>
+
                             </div>
                         </div>
                     </div>

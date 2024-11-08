@@ -15,6 +15,11 @@
 
     <!-- Page container -->
     <section class="container pt-3 pb-5 pb-md-6 mb-2 mb-lg-0">
+        <div class="row mb-5" *ngIf="descuento!=undefined">
+            <div class="col-12">
+                <img [src]=" url + '/get_img_banner_descuento/'+ descuento.banner" style="width: 100% !important;">
+            </div>
+        </div>
 
 
         <!-- Toolbar + Pagination -->
@@ -236,7 +241,8 @@
                                             <i class="sr-star cxi-star-filled active"></i>
                                         </div>
                                     </div>
-                                    <div class="card-product-widgets-bottom">
+                                    <div class="card-product-widgets-top">
+                                        <span class="badge product-badge bg-danger text-white" *ngIf="descuento != undefined">-{{ descuento.descuento}}%</span>
                                         <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
                                     </div>
                                 </div>
@@ -244,8 +250,15 @@
                                     <h3 class="card-product-title text-truncate mb-2">
                                         <a [routerLink]="['/productos/', item.slug]" class="nav-link">{{item.titulo}}</a>
                                     </h3>
-                                    <div class="d-flex align-items-center">
+                                    <!-- si no hay descuento aparece el precio original -->
+                                    <div class="d-flex align-items-center" *ngIf="descuento == undefined">
                                         <span class="h5 d-inline-block mb-0">{{item.precio}}€</span>
+                                    </div>
+                                    <!-- si  hay descuento  -->
+                                    <div class="d-flex align-items-center" *ngIf="descuento != undefined">
+                                        <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
+                                        <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:descuento.descuento}}€</span>
+                                        <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
                                     </div>
                                 </div>
                                 <div class="card-footer">

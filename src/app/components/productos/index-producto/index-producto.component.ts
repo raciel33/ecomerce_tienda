@@ -4,6 +4,7 @@ import { ClienteService } from 'src/app/service/cliente.service';
 import { GLOBAL } from 'src/app/service/GLOBAL';
 
 import { io } from "socket.io-client";
+import { GuestService } from 'src/app/service/guest.service';
 
 declare var noUiSlider:any;
 declare var $: any
@@ -48,13 +49,16 @@ export class IndexProductoComponent implements OnInit {
     cantidad : 1
   }
 
+  public descuento: any = undefined;
+
   public load_btn = false;
 
   public socket = io('http://localhost:3005')
 
 
 
-  constructor( private _clienteService: ClienteService, private _router: ActivatedRoute, private _clienteServices: ClienteService){
+  constructor( private _clienteService: ClienteService, private _router: ActivatedRoute,
+     private _clienteServices: ClienteService, private _guetsService: GuestService){
 
         this.url = GLOBAL.url
 
@@ -159,6 +163,23 @@ para que el index.producto la capte y muestre los productos por dicha categoria
             $('.cs-range-slider-value-max').val(values[1]);
         });
         $('.noUi-tooltip').css('font-size','11px');
+
+
+        //obtener los descuentos activos que hay en la tienda
+        this._guetsService.obtener_descuento_activo().subscribe(
+          (resp:any)=>{
+            if (resp.data != undefined) {
+              this.descuento = resp.data[0]
+              console.log(this.descuento);
+
+            } else {
+              this.descuento = undefined
+            }
+          },
+          err=>{
+
+          }
+        )
 
   }
 //FUNCIONES EN EL NAVBAR DEL CONTAINER

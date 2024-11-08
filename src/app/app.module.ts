@@ -20,6 +20,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import {  NgxStripeModule } from 'ngx-stripe';
+import { DescuentosPipe } from './pipes/descuentos.pipe';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {  NgxStripeModule } from 'ngx-stripe';
     CarritoComponent,
     DireccionesComponent,
     CheckoutComponent,
+    DescuentosPipe,
   ],
   imports: [
     BrowserModule,

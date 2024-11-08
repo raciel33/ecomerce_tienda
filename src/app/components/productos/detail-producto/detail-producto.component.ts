@@ -25,12 +25,15 @@ export class DetailProductoComponent implements OnInit{
     variedad:'',
     cantidad : 1
   }
+  public descuento: any = undefined;
 
   public cargando = false;
   public socket = io('http://localhost:3005')
 
+
+
   constructor( private _route: ActivatedRoute, private _gusestService: GuestService,
-    private _clienteServices: ClienteService
+    private _clienteServices: ClienteService,
   ){
     this.url = GLOBAL.url
 
@@ -129,7 +132,21 @@ export class DetailProductoComponent implements OnInit{
 
     }, 1000)
 
+  //obtener los descuentos activos que hay en la tienda
+  this._gusestService.obtener_descuento_activo().subscribe(
+    (resp:any)=>{
+      if (resp.data != undefined) {
+        this.descuento = resp.data[0]
+        console.log(this.descuento);
 
+      } else {
+        this.descuento = undefined
+      }
+    },
+    err=>{
+
+    }
+  )
 
 
 

@@ -4,6 +4,7 @@ import { ClienteService } from 'src/app/service/cliente.service';
 import { GLOBAL } from 'src/app/service/GLOBAL';
 
 import { io } from "socket.io-client";
+import { GuestService } from 'src/app/service/guest.service';
 
 declare var iziToast: any;
 declare var $: any;
@@ -24,9 +25,11 @@ export class NavComponent implements OnInit{
   public carrito: Array<any> = []
   public url;
   public subtotal = 0;
-  public socket = io('http://localhost:3005')
+  public descuento: any = undefined;
 
-  constructor(private _clienteService: ClienteService, private _router: Router){
+  public socket = io('http://localhost:3005');
+
+  constructor(private _clienteService: ClienteService, private _router: Router, private _guetsService: GuestService){
 
 
     this.url = GLOBAL.url
@@ -92,6 +95,24 @@ ngOnInit(): void {
  this.socket.on('add-new-carrito', this.get_carrito_cliente.bind(this));
 
 
+ //obtener los descuentos activos que hay en la tienda
+ this._guetsService.obtener_descuento_activo().subscribe(
+  (resp:any)=>{
+    if (resp.data != undefined) {
+      this.descuento = resp.data[0]
+      console.log(this.descuento);
+
+    } else {
+      this.descuento = undefined
+    }
+  },
+  err=>{
+
+  }
+)
+
+
+
 }
 
 //información de la tienda
@@ -142,11 +163,27 @@ get_carrito_cliente(){
   //precio total del carrito
   calcular_carrito(){
     this.subtotal = 0;
-    this.carrito.forEach(element=>{
+    if( this.descuento == undefined){
 
-      this.subtotal = this.subtotal + parseInt(element.producto.precio);
+      this.carrito.forEach(element=>{
+
+        this.subtotal = this.subtotal + parseInt(element.producto.precio);
+      }
+      )
     }
-    )
+    //si hay descuento
+    else if( this.descuento != undefined){
+
+      this.carrito.forEach(element=>{
+
+        //parseInt(element.producto.precio)*this.descuento.descuento)/100 --> calculo del porcentaje del descuento
+
+        let precio_con_descuento = Math.round(parseInt(element.producto.precio) - ( parseInt(element.producto.precio)*this.descuento.descuento)/100)
+
+        this.subtotal = this.subtotal + precio_con_descuento;
+      }
+      )
+    }
   }
 
   //eliminacion en el carrito , se utiliza socket para que actualice pagina en realtime
