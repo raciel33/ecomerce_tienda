@@ -118,8 +118,9 @@ para que el index.producto la capte y muestre los productos por dicha categoria
     //console.log(this.filtro);
     this._clienteService.listar_productos_publico(this.filtro ).subscribe(
       (resp:any)=>{
-         //  console.log(resp);
+           console.log(resp);
            this.productos = resp.data;
+
            this.cargando = false;
       },
       err=>{
@@ -316,11 +317,13 @@ else if(this.sort_by == 'zaTitulo'){
 
             }
           )
+
             }
   }
 
 
   agregarProducto(producto: any){
+    console.log(producto);
 
     if (this.carrito_data.cantidad <= producto.stock) {
 
@@ -334,6 +337,7 @@ else if(this.sort_by == 'zaTitulo'){
 
    this._clienteServices.agregar_carrito_cliente( data ).subscribe(
     (resp:any)=>{
+      console.log(data);
 
        if (resp.data == undefined) {
         iziToast.show({

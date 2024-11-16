@@ -32,7 +32,23 @@ export class GuestService {
        return this._http.get(`${this.url}/listar_productos_recomendados_publico/${categoria}`,  {headers: headers})
 
      }
+     //
 
+     listar_productos_nuevos_publico(){
+
+      let headers = new HttpHeaders().set('Content-Type','application/json')
+
+         return this._http.get(`${this.url}/listar_productos_nuevos_publico/`,  {headers: headers})
+
+       }
+       //
+       listar_mas_vendidos_publico(){
+
+        let headers = new HttpHeaders().set('Content-Type','application/json')
+
+           return this._http.get(`${this.url}/listar_mas_vendidos_publico/`,  {headers: headers})
+
+         }
   //comunidades autonomas
   get_ccaa( ){
        return this._http.get('./assets/ccaa.json')
