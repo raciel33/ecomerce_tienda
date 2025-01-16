@@ -15,6 +15,20 @@ export class GuestService {
  }
 
 
+//para extraer los headers(token)
+get headers(){
+  return {
+    headers: {
+      'x-token':this.token //el this.token esta en la funcion get token()
+     }
+   }
+}
+  //Para extraer el token
+  get token():string{
+    return localStorage.getItem( 'token') || '';
+  }
+
+
 
  detalle_producto_publico(slug: any  ){
 
@@ -79,4 +93,21 @@ export class GuestService {
        return this._http.get(`${this.url}/obtener_descuento_activo/` , {headers: headers})
 
      }
+
+listar_reviews_producto_publico(id: any):Observable<any>{
+
+  let headers = new HttpHeaders().set('Content-Type','application/json')
+
+      return this._http.get(`${this.url}/listar_reviews_producto_publico/${id}`, {headers: headers})
+
+    }
+  //
+
+  starts_reviews_producto_publico( data: any):Observable<any>{
+
+    //let headers = new HttpHeaders().set('Content-Type','application/json')
+
+        return this._http.put(`${this.url}/starts_reviews_producto_publico/${data.id}`, data  )
+
+      }
 }

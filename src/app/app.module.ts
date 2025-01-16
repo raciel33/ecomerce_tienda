@@ -21,6 +21,14 @@ import { DireccionesComponent } from './components/usuario/direcciones/direccion
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import {  NgxStripeModule } from 'ngx-stripe';
 import { DescuentosPipe } from './pipes/descuentos.pipe';
+import { ContactoComponent } from './components/contacto/contacto.component';
+import { IndexOrdersComponent } from './components/usuario/orders/index-orders/index-orders.component';
+import { DetailsOrderComponent } from './components/usuario/orders/details-order/details-order.component';
+
+import { RatingModule } from 'ng-starrating';
+import { IndexReviewComponent } from './components/usuario/review/index-review/index-review.component';
+import { DevolucionComponent } from './components/productos/devolucion/devolucion.component';
+
 
 
 @NgModule({
@@ -38,11 +46,19 @@ import { DescuentosPipe } from './pipes/descuentos.pipe';
     DireccionesComponent,
     CheckoutComponent,
     DescuentosPipe,
+    ContactoComponent,
+    IndexOrdersComponent,
+    DetailsOrderComponent,
+    IndexReviewComponent,
+    DevolucionComponent,
+
+
   ],
   imports: [
     BrowserModule,
     routing,
     FormsModule,
+    RatingModule,
     HttpClientModule,
     NgxPaginationModule,
     ReactiveFormsModule,

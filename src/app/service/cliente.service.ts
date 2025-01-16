@@ -70,7 +70,7 @@ validarToken():boolean{
    }
 
 
-
+//--------cliente
  login_cliente(data: any ){
 
   return this._http.post(`${this.url}/login_cliente`,data, this.headers)
@@ -100,6 +100,13 @@ validarToken():boolean{
 
 }
 
+get_producto_id( id: any ):Observable<any>{
+
+  console.log(id);
+  return this._http.get(`${this.url}/get_producto_id/`+id ,this.headers)
+
+ }
+
 detalle_producto_publico(data: any  ){
 
   return this._http.post(`${this.url}/detalle_producto_publico/` , data, this.headers)
@@ -124,6 +131,7 @@ delete_carrito_cliente(id: any  ){
   return this._http.delete(`${this.url}/delete_carrito_cliente/`+ id , this.headers)
 
 }
+//Direcciones del cliente---------------
 
 registro_direccion_cliente(data: any  ){
 
@@ -151,7 +159,7 @@ get_direccion_principal(id: any  ){
   return this._http.get(`${this.url}/get_direccion_principal/`+id + '/', this.headers)
 
 }
-
+//compra-------
 registro_compra_cliente(data: any  ){
 
   return this._http.post(`${this.url}/registro_compra_cliente/`, data , this.headers)
@@ -176,5 +184,61 @@ validarCupon( cupon: any){
   return this._http.get(`${this.url}/validarCupon/`+cupon , this.headers)
 
 }
+
+//Contacto
+
+enviar_mensaje_contacto( data: any){
+  return this._http.post(`${this.url}/enviar_mensaje_contacto/`, data , this.headers)
+
+}
+
+envio_correo_mensaje_cliente( id: any){
+  return this._http.get(`${this.url}/envio_correo_mensaje_cliente/` + id , this.headers)
+
+}
+
+//ordernes del cliente
+get_orders_cliente( id: any){
+  return this._http.get(`${this.url}/get_orders_cliente/`+id , this.headers)
+
 }
 //
+get_detail_order_cliente( id: any){
+  return this._http.get(`${this.url}/get_detail_order_cliente/`+id , this.headers)
+
+}
+//
+get_pedidos_cliente( id: any){
+  return this._http.get(`${this.url}/get_pedidos_cliente/`+id , this.headers)
+
+}
+//Reseñas del cliente
+//
+emitir_review_producto_cliente( data: any){
+  return this._http.post(`${this.url}/emitir_review_producto_cliente/`, data , this.headers)
+
+}
+//
+get_review_producto_cliente( id: any){
+  return this._http.get(`${this.url}/get_review_producto_cliente/`+id , this.headers)
+
+}
+//
+get_review_cliente( id: any){
+  return this._http.get(`${this.url}/get_review_cliente/`+id , this.headers)
+
+}
+//devolucion
+
+registro_dev_prod_cliente( data: any){
+
+ // console.log(data);
+  return this._http.post(`${this.url}/registro_dev_prod_cliente/${data.venta_id}` , data , this.headers)
+
+}
+//
+get_detail_venta( id: any){
+  return this._http.get(`${this.url}/get_detail_venta/`+id , this.headers)
+
+}
+}

@@ -1,0 +1,394 @@
+<app-nav></app-nav>
+<main class="cs-page-wrapper">
+    <!-- Breadcrumb -->
+    <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                    <a [routerLink]="['/']"><i class="cxi-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Mi perfil</li>
+            </ol>
+        </div>
+    </nav>
+    <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+
+            <!-- Account menu (sticky sidebar) -->
+            <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
+                <app-sidebar></app-sidebar>
+            </aside>
+
+
+            <!-- Content -->
+            <div class="col-lg-8 ml-auto">
+                <div class="row mb-4">
+                    <div class="col-12 ml-auto ">
+                        <div class="card card-body py-3 box-shadow ">
+                            <table class="table mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Ref:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{ producto._id.toLowerCase()}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Dirección de Envío:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">c/San Carlos 25, CP: 28921 , Madrid - España</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Teléfono:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">666666666</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Email:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">racielreyes@hotmail.es</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Fecha:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{ fecha | date }}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <hr>
+                <div class="d-flex align-items-center justify-content-between mb-4 pb-sm-2 mt-3">
+                    <h1 class="h2 mb-0">Devolución de: <span class="text-danger">
+                    {{producto.titulo}}
+                    </span></h1>
+
+                </div>
+
+                <!-- Orders accordion -->
+                <div class="accordion-alt" id="orders" *ngIf="cargando">
+
+                    <ng-container *ngIf="estado != 'En devolución'">
+
+                        <ng-container *ngIf="producto">
+                            <form #registroForm="ngForm">
+                                <div class="card-body" *ngIf="producto!=undefined ">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-lg-12 form-group">
+                                                    <!-- Stacked radio buttons -->
+                                                    <div class="form-check mb-2 ">
+                                                        <input class="form-check-input" type="radio" id="motivo" name="motivo" value="defectuoso" [(ngModel)]="devolucion.motivo">
+                                                        <label class="form-check-label" for="motivo">El artículo llegó dañado</label>
+                                                    </div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input" type="radio" id="motivo" name="motivo" value="equivocada" [(ngModel)]="devolucion.motivo">
+                                                        <label class="form-check-label" for="motivo">Talla equivocada</label>
+                                                    </div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input" type="radio" id="motivo" name="motivo" value="opinion" [(ngModel)]="devolucion.motivo">
+                                                        <label class="form-check-label" for="motivo">Cambio de opinión</label>
+                                                    </div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input" type="radio" id="motivo" name="motivo" value="noCoincide" [(ngModel)]="devolucion.motivo">
+                                                        <label class="form-check-label" for="motivo"> El artículo no coincide con la descripción</label>
+                                                    </div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input" type="radio" id="motivo" name="motivo" value="retraso" [(ngModel)]="devolucion.motivo">
+                                                        <label class="form-check-label" for="motivo"> Retrasos con las entregas</label>
+                                                    </div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input" type="radio" id="motivo" name="motivo" value="otros" [(ngModel)]="devolucion.motivo">
+                                                        <label class="form-check-label" for="motivo"> Otros motivos...</label>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-12 form-group">
+                                                    <label for="validationCustom01">Comentario opcional</label>
+                                                    <textarea class="form-control" placeholder="Comentarios de la devolución" rows="5" name="comentario" [(ngModel)]="devolucion.comentario"></textarea>
+                                                </div>
+                                                <!---->
+                                                <div class="col-lg-12 form-group">
+                                                    <!--
+                                                          <tinymce [config]="config" name="contenido" [(ngModel)]="producto.contenido"></tinymce>
+                                                        -->
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row">
+
+                                                <div class="col-md-8 offset-lg-1">
+
+                                                    <!-- Product card carousel -->
+                                                    <div class="card card-product box-shadow">
+                                                        <div class="card-product-img   ">
+                                                            <div>
+                                                                <a class="cs-carousel-inner ">
+                                                                    <div>
+                                                                        <img [src]=" url + '/obtener_portada/'+ producto.portada" alt="Product image" style="width: 100%;">
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class=" card-product-widgets-top ">
+                                                                <div class="ml-auto star-rating ">
+                                                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=1 }"></i>
+                                                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=2 }"></i>
+                                                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=3 }"></i>
+                                                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=4 }"></i>
+                                                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=5 }"></i>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card-body pb-2 " style="background-color: white; ">
+                                                            <h3 class="card-product-title text-truncate mb-2 ">
+                                                                <a href="# " class="nav-link ">{{producto.titulo}}</a>
+                                                            </h3>
+                                                            <!-- si no hay descuento aparece el precio original -->
+                                                            <div class="d-flex align-items-center mb-3">
+                                                                <span class="h5 d-inline-block mb-0">{{producto.precio}}€</span>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="card-footer ">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body" *ngIf="producto == undefined">
+                                    <h1>No se encontró el registro</h1>
+                                    <div class="col-3 mx-auto">
+
+                                        <img src="../../../../assets/img/advertencia.png" width="100%">
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button *ngIf="cargando" class="btn btn-primary mr-3" (click)="devolver(registroForm)">Devolver producto</button>
+                                    <a class="btn btn-warning" [routerLink]="['/cuenta/orders']">Regresar</a>
+                                    <button *ngIf="!cargando" type="button" class="btn btn-secondary" disabled>
+                                            <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                                            Actualizando...
+                                          </button>
+
+
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <!-- Launch long modal -->
+                                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" [attr.data-target]="'#modalLong'">
+                                            Ver política de devolución
+                                          </button>
+                                    </div>
+
+                                    <!-- Modal para la politica de devolucion del producto-->
+                                    <div class="modal fade " id="modalLong" tabindex="-1" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Política de devoluciones</h4>
+                                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <p>Nuestra política dura 30 días. Si han pasado 30 días desde su compra, desafortunadamente no podemos ofrecerle un reembolso o cambio.</p>
+                                                    <p>Para ser elegible para una devolución, su artículo debe estar sin usar y en las mismas condiciones en que lo recibió. También debe estar en el embalaje original.</p>
+                                                    <p>Varios tipos de productos están exentos de ser devueltos. Los productos perecederos como alimentos, flores, periódicos o revistas no pueden devolverse. Tampoco aceptamos productos que sean productos
+                                                        íntimos o sanitarios, materiales peligrosos o líquidos o gases inflamables.</p>
+                                                    <p>Artículos adicionales no retornables:</p>
+                                                    <p>- Tarjetas de regalo</p>
+                                                    <p>- Productos de software descargables</p>
+                                                    <p>- Algunos artículos de salud y cuidado personal</p>
+                                                    <p>Para completar su devolución, requerimos un recibo o comprobante de compra.</p>
+                                                    <p>No envíe su compra de vuelta al fabricante.</p>
+                                                    <p>Hay ciertas situaciones en las que solo se otorgan reembolsos parciales (si corresponde)</p>
+                                                    <p>- Libro con signos evidentes de uso</p>
+                                                    <p>- CD, DVD, cinta VHS, software, videojuego, cinta de cassette o disco de vinilo que se ha abierto</p>
+                                                    <p>- Cualquier artículo que no esté en su estado original, está dañado o le faltan piezas por razones que no se deben a nuestro error</p>
+                                                    <p>- Cualquier artículo devuelto más de 30 días después entrega</p>
+                                                    <p><strong>Reembolsos (si corresponde)</strong></p>
+                                                    <p>Una vez que se reciba e inspeccione su devolución, le enviaremos un correo electrónico para notificarle que hemos recibido su artículo devuelto. También le notificaremos la aprobación o rechazo de su
+                                                        reembolso.
+                                                    </p>
+                                                    <p>Si es aprobado, su reembolso será procesado y se aplicará automáticamente un crédito a su tarjeta de crédito o método de pago original, dentro de un cierto cantidad de días.</p>
+                                                    <p><strong>Reembolsos tardíos o faltantes (si corresponde)</strong></p>
+                                                    <p>Si aún no ha recibido un reembolso, primero verifique su cuenta bancaria nuevamente.</p>
+                                                    <p>Luego comuníquese con la compañía de su tarjeta de crédito, puede pasar algún tiempo antes de que su reembolso se publique oficialmente.</p>
+                                                    <p>Luego contacte a su banco. A menudo hay algún tiempo de procesamiento antes de que se publique un reembolso.</p>
+                                                    <p>Si ha hecho todo esto y aún no ha recibido su reembolso, contáctenos en racielreyes@hotmail.es.</p>
+                                                    <p><strong>Artículos en oferta (si corresponde) </strong></p>
+                                                    <p>Solo se pueden reembolsar los artículos a precio regular, desafortunadamente los artículos en oferta no se pueden reembolsar.</p>
+                                                    <p><strong>Intercambios (si corresponde) </strong></p>
+                                                    <p>Solo reemplazamos los artículos si están motivos o dañados. Si necesita cambiarlo por el mismo artículo, envíenos un correo electrónico a racielreyes@hotmail.es y envíe su artículo a: Calle pino Resinero
+                                                        3 3, 28600 Navalcarnero, Madrid, Spain.
+                                                    </p>
+                                                    <p><strong>Regalos </strong></p>
+                                                    <p>Si el artículo se marcó como regalo cuando se compró y se le envió directamente a usted, recibirá un crédito de regalo por el valor de su devolución. Una vez que se reciba el artículo devuelto, se le
+                                                        enviará un certificado de regalo.</p>
+                                                    <p>Si el artículo no se marcó como regalo cuando lo compró, o si el donante recibió el pedido para que se lo envíen más tarde, le enviaremos un reembolso al donante y él encontrará fuera de su regreso.</p>
+                                                    <p><strong> Envío </strong></p>
+                                                    <p>Para devolver su producto, debe enviarlo por correo a: Calle pino Resinero 3 3, 28600 Navalcarnero, Madrid, Spain.</p>
+                                                    <p>Usted será responsable de pagar sus propios costos de envío para devolver su artículo. Los gastos de envío no son reembolsables. Si recibe un reembolso, el costo del envío de devolución se deducirá de
+                                                        su reembolso.
+                                                    </p>
+                                                    <p>Dependiendo de dónde viva, el tiempo que le tome a su producto intercambiado llegar a usted puede variar.</p>
+                                                    <p>Si está enviando un artículo de más de $75, debería considerar usar un servicio de envío rastreable o comprar un seguro de envío. No garantizamos que recibiremos su artículo devuelto.</p>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </ng-container>
+                        <ng-container *ngIf="producto == undefined">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h1>No se encontró el registro</h1>
+                                    <div class="col-3 mx-auto">
+
+                                        <img src="../../../../assets/img/advertencia.png" width="100%">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="estado == 'En devolución'">
+                        <div class="row">
+                            <div class="col-6">
+                                <h3><span class="badge bg-info text-white">{{estado}}</span>
+                                </h3>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- Horizontal step wrapper -->
+                                        <div class="steps row mt-5 ">
+
+                                            <!-- Step -->
+                                            <div class="col-md-12">
+                                                <div class="step mb-md-0 mb-5">
+                                                    <div class="step-head mb-3">
+                                                        <span class="step-indicator fs-1">01</span>
+                                                        <span class="step-line"></span>
+                                                    </div>
+                                                    <div class="step-body">
+                                                        <h3 class="h5 mb-2">Empaqueta</h3>
+                                                        <p class="mb-3 text-muted">
+                                                            Asegúrate de que el producto está bien empaquetado</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Step -->
+                                            <div class="col-md-12">
+                                                <div class="step mb-md-0 mb-5">
+                                                    <div class="step-head mb-3">
+                                                        <span class="step-indicator">02</span>
+                                                        <span class="step-line"></span>
+                                                    </div>
+                                                    <div class="step-body">
+                                                        <h3 class="h5 mb-2">Envío</h3>
+                                                        <p class="mb-3 text-muted">
+                                                            Envianos el producto a nuestra dirección indicando la refrencia: <span class="text-primary">#{{producto._id}}</span> </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Step -->
+                                            <div class="col-md-12">
+                                                <div class="step">
+                                                    <div class="step-head mb-3">
+                                                        <span class="step-indicator">03</span>
+                                                    </div>
+                                                    <div class="step-body">
+                                                        <h3 class="h5 mb-2">Reembolso</h3>
+                                                        <p class="mb-3 text-muted">
+                                                            En cuanto revisemos el producto se te reembolsará el importe
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <!-- Product card carousel -->
+                                <div class="card card-product box-shadow">
+                                    <div class="card-product-img   ">
+                                        <div>
+                                            <a class="cs-carousel-inner ">
+                                                <div>
+                                                    <img [src]=" url + '/obtener_portada/'+ producto.portada" alt="Product image" style="width: 100%;">
+                                                </div>
+
+                                            </a>
+                                        </div>
+                                        <div class=" card-product-widgets-top ">
+                                            <div class="ml-auto star-rating ">
+                                                <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=1 }"></i>
+                                                <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=2 }"></i>
+                                                <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=3 }"></i>
+                                                <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=4 }"></i>
+                                                <i class="sr-star cxi-star-filled " [ngClass]="{'active': producto.starts >=5 }"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-body pb-2 " style="background-color: white; ">
+                                        <h3 class="card-product-title text-truncate mb-2 ">
+                                            <a href="# " class="nav-link ">{{producto.titulo}}</a>
+                                        </h3>
+                                        <!-- si no hay descuento aparece el precio original -->
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="h5 d-inline-block mb-0">{{producto.precio}}€</span>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="card-footer ">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </ng-container>
+
+
+
+
+                </div>
+
+                <div class="row" *ngIf="!cargando">
+                    <div class="spinner-grow" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+
+</main>
+
+<app-footer></app-footer>

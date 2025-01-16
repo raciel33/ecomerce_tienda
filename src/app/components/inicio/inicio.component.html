@@ -19,45 +19,39 @@
             </div>
 
             <!-- Slide 2 -->
-            <div class="bg-size-cover py-xl-6" style="background-image: url(../../assets/img/ecommerce/home/hero-slider/02.jpg);">
+            <div class="bg-size-cover py-xl-6" style="background-image: url(../../assets/img/ecommerce/home/hero-slider/cojin_01.jpg);">
                 <div class="container pt-5 pb-6">
                     <div class="row pb-lg-6">
                         <div class="col-lg-6 offset-lg-1 offset-xl-0 pb-4 pb-md-6">
-                            <h3 class="font-size-lg text-uppercase cs-from-top cs-delay-1">New Collection</h3>
-                            <h2 class="display-2 mb-lg-5 pb-3 cs-scale-down">Fall-Winter 2021</h2>
-                            <div class="mb-4 cs-scale-down cs-delay-2">
-                                <a href="shop-catalog.html" class="btn btn-outline-primary btn-lg">Shop the collection</a>
-                            </div>
+                            <h3 class="font-size-lg text-uppercase cs-from-top cs-delay-1">Nueva colección </h3>
+                            <h2 class="display-2 mb-lg-5 pb-3 cs-scale-down">Cojines 2025</h2>
+
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Slide 3 -->
-            <div class="bg-size-cover py-xl-6" style="background-image: url(../../assets/img/ecommerce/home/hero-slider/03.jpg);">
+            <div class="bg-size-cover py-xl-6" style="background-image: url(../../assets/img/ecommerce/home/hero-slider/m.jpg);">
                 <div class="container pt-5 pb-6">
                     <div class="row pb-lg-6">
                         <div class="col-lg-6 offset-lg-1 offset-xl-0 pb-4 pb-md-6">
-                            <h3 class="font-size-lg text-uppercase cs-from-left cs-delay-1">Limited Edition</h3>
-                            <h2 class="display-2 mb-lg-5 pb-3 cs-from-left">Leather Issue</h2>
-                            <div class="mb-4 cs-scale-up cs-delay-2">
-                                <a href="shop-catalog.html" class="btn btn-outline-primary btn-lg">Shop the collection</a>
-                            </div>
+                            <h3 class="font-size-lg text-uppercase cs-from-left cs-delay-1">Mejores tejidos</h3>
+                            <h2 class="display-2 mb-lg-5 pb-3 cs-from-left">Mantas últimas tendencias</h2>
+
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Slide 4 -->
-            <div class="bg-size-cover py-xl-6" style="background-image: url(../../assets/img/ecommerce/home/hero-slider/04.jpg);">
+            <div class="bg-size-cover py-xl-6" style="background-image: url(../../assets/img/ecommerce/home/hero-slider/e.jpg);">
                 <div class="container pt-5 pb-6">
                     <div class="row pb-lg-6">
                         <div class="col-lg-6 offset-lg-1 offset-xl-0 pb-4 pb-md-6">
-                            <h3 class="font-size-lg text-uppercase cs-from-top cs-delay-1">Hottest Prices</h3>
-                            <h2 class="display-2 mb-lg-5 pb-3 cs-scale-down">Kidswear Sales</h2>
-                            <div class="mb-4 cs-scale-down cs-delay-2">
-                                <a href="shop-catalog.html" class="btn btn-outline-primary btn-lg">Shop sale now</a>
-                            </div>
+                            <h3 class="font-size-lg text-uppercase cs-from-top cs-delay-1">Mejor confort</h3>
+                            <h2 class="display-2 mb-lg-5 pb-3 cs-scale-down">Edredones</h2>
+
                         </div>
                     </div>
                 </div>
@@ -85,28 +79,32 @@
         <div class="cs-carousel cs-nav-outside">
             <div class="cs-carousel-inner cs-carousel-inner-two" data-carousel-options=''>
                 <!-- Category -->
-                <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
-                    <div class="cs-image-inner mb-3 rounded">
-                        <img src="../../assets/img/ecommerce/home/categories/01.jpg" alt="Women’s">
+                <a [routerLink]="['/productos/categoria/cojines' ]" class="d-block cs-image-scale cs-heading-highlight text-center">
+                    <div class="cs-image-inner mb-3 rounded" style="height: 400px;">
+                        <img src="../../assets/img/ecommerce/home/categories/c.jpg" alt="Cojines">
                     </div>
-                    <h3 class="h5 mb-1">Women’s</h3>
+                    <h3 class="h5 mb-1">Cojines</h3>
                 </a>
                 <!-- Category -->
-                <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
-                    <div class="cs-image-inner mb-3 rounded">
-                        <img src="../../assets/img/ecommerce/home/categories/02.jpg" alt="Men’s">
+                <a [routerLink]="['/productos/categoria/mantas' ]" class="d-block cs-image-scale cs-heading-highlight text-center">
+                    <div class="cs-image-inner mb-3 rounded" style="height: 400px;">
+                        <img src="../../assets/img/ecommerce/home/categories/m.jpg" alt="Mantas">
                     </div>
-                    <h3 class="h5 mb-1">Men’s</h3>
+                    <h3 class="h5 mb-1">Mantas</h3>
                 </a>
                 <!-- Category -->
-                <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
-                    <div class="cs-image-inner mb-3 rounded">
-                        <img src="../../assets/img/ecommerce/home/categories/03.jpg" alt="Kids'">
+                <a [routerLink]="['/productos/categoria/edredones' ]" class="d-block cs-image-scale cs-heading-highlight text-center">
+                    <div class="cs-image-inner mb-3 rounded " style="height: 400px;">
+                        <img src="../../assets/img/ecommerce/home/categories/e2.jpg" alt="Edredones'">
                     </div>
-                    <h3 class="h5 mb-1">Kids'</h3>
+                    <h3 class="h5 mb-1">Edredones</h3>
                 </a>
             </div>
         </div>
+
+
+
+
     </section>
 
 
@@ -134,11 +132,11 @@
                             </a>
                             <div class="card-product-widgets-top">
                                 <div class="star-rating ml-auto">
-                                    <i class="sr-star cxi-star-filled active"></i>
-                                    <i class="sr-star cxi-star-filled active"></i>
-                                    <i class="sr-star cxi-star-filled active"></i>
-                                    <i class="sr-star cxi-star-filled active"></i>
-                                    <i class="sr-star cxi-star-filled active"></i>
+                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=1 }"></i>
+                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=2 }"></i>
+                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=3 }"></i>
+                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=4 }"></i>
+                                    <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=5 }"></i>
                                 </div>
                             </div>
 
@@ -147,7 +145,9 @@
                             </div> -->
                             <div class="card-product-widgets-top">
                                 <span class="badge product-badge bg-danger text-white" *ngIf="descuento != undefined">-{{ descuento.descuento}}%</span>
-                                <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
+                                <span class="badge product-badge bg-danger text-white" *ngIf="descuento != undefined && item.descuento == undefined">-{{ descuento.descuento}}%</span>
+                                <span class="badge product-badge bg-danger text-white" *ngIf="item.descuento != undefined && descuento == undefined">-{{ item.descuento}}%</span>
+
                             </div>
                         </div>
                         <div class="card-body">
@@ -155,13 +155,26 @@
                                 <a href="shop-single.html" class="nav-link">{{item.titulo}}</a>
                             </h3>
                             <!-- si no hay descuento aparece el precio original -->
-                            <div class="d-flex align-items-center" *ngIf="descuento == undefined">
+                            <div class="d-flex align-items-center" *ngIf="descuento == undefined && item.descuento == undefined">
                                 <span class="h5 d-inline-block mb-0">{{item.precio}}€</span>
                             </div>
-                            <!-- si  hay descuento  -->
-                            <div class="d-flex align-items-center" *ngIf="descuento != undefined">
+
+                            <!-- si  hay descuento  generales de todos los productos-->
+                            <div class="d-flex align-items-center" *ngIf="descuento != undefined && item.descuento != undefined">
                                 <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
                                 <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:descuento.descuento}}€</span>
+                                <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
+                            </div>
+                            <div class="d-flex align-items-center" *ngIf="descuento != undefined && item.descuento == undefined">
+                                <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
+                                <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:descuento.descuento}}€</span>
+                                <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
+                            </div>
+                            <!-- si  hay descuento único del producto  -->
+
+                            <div class="d-flex align-items-center" *ngIf="item.descuento != undefined && descuento == undefined">
+                                <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
+                                <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:item.descuento}}€</span>
                                 <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
                             </div>
                         </div>
@@ -203,12 +216,18 @@
                                 </a>
                                 <div class="card-product-widgets-top">
                                     <div class="star-rating ml-auto">
-                                        <i class="sr-star cxi-star-filled active"></i>
-                                        <i class="sr-star cxi-star-filled active"></i>
-                                        <i class="sr-star cxi-star-filled active"></i>
-                                        <i class="sr-star cxi-star-filled active"></i>
-                                        <i class="sr-star cxi-star-filled active"></i>
+                                        <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=1 }"></i>
+                                        <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=2 }"></i>
+                                        <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=3 }"></i>
+                                        <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=4 }"></i>
+                                        <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=5 }"></i>
                                     </div>
+                                </div>
+                                <div class="card-product-widgets-top">
+                                    <span class="badge product-badge bg-danger text-white" *ngIf="descuento != undefined">-{{ descuento.descuento}}%</span>
+                                    <span class="badge product-badge bg-danger text-white" *ngIf="descuento != undefined && item.descuento == undefined">-{{ descuento.descuento}}%</span>
+                                    <span class="badge product-badge bg-danger text-white" *ngIf="item.descuento != undefined && descuento == undefined">-{{ item.descuento}}%</span>
+
                                 </div>
                                 <div class="card-product-widgets-bottom">
                                     <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
@@ -219,13 +238,26 @@
                                     <a href="shop-single.html" class="nav-link">{{item.titulo}}</a>
                                 </h3>
                                 <!-- si no hay descuento aparece el precio original -->
-                                <div class="d-flex align-items-center" *ngIf="descuento == undefined">
+                                <div class="d-flex align-items-center" *ngIf="descuento == undefined && item.descuento == undefined">
                                     <span class="h5 d-inline-block mb-0">{{item.precio}}€</span>
                                 </div>
-                                <!-- si  hay descuento  -->
-                                <div class="d-flex align-items-center" *ngIf="descuento != undefined">
+
+                                <!-- si  hay descuento  generales de todos los productos-->
+                                <div class="d-flex align-items-center" *ngIf="descuento != undefined && item.descuento != undefined">
                                     <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
                                     <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:descuento.descuento}}€</span>
+                                    <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
+                                </div>
+                                <div class="d-flex align-items-center" *ngIf="descuento != undefined && item.descuento == undefined">
+                                    <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
+                                    <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:descuento.descuento}}€</span>
+                                    <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
+                                </div>
+                                <!-- si  hay descuento único del producto  -->
+
+                                <div class="d-flex align-items-center" *ngIf="item.descuento != undefined && descuento == undefined">
+                                    <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
+                                    <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:item.descuento}}€</span>
                                     <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
                                 </div>
                             </div>

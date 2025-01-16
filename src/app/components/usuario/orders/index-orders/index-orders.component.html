@@ -1,0 +1,131 @@
+<app-nav></app-nav>
+<main class="cs-page-wrapper">
+    <!-- Breadcrumb -->
+    <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                    <a [routerLink]="['/']"><i class="cxi-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Mi perfil</li>
+            </ol>
+        </div>
+    </nav>
+    <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+
+            <!-- Account menu (sticky sidebar) -->
+            <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
+                <app-sidebar></app-sidebar>
+            </aside>
+
+            <!-- Content -->
+            <div class="col-lg-8 ml-auto">
+                <div class="d-flex align-items-center justify-content-between mb-4 pb-sm-2">
+                    <h1 class="h2 mb-0">Mis pedidos</h1>
+
+                </div>
+
+                <!-- Orders accordion -->
+                <div class="accordion-alt" id="orders" *ngIf="!cargando">
+
+                    <!-- Order -->
+
+                    <ng-container *ngIf="pedidos!= undefined">
+                        <div class="card border-bottom" *ngFor="let item of pedidos | paginate: { itemsPerPage: pageSize, currentPage: p }">
+                            <ng-container *ngFor="let i of orders">
+                                <div class="card-header accordion-heading py-1" *ngIf="item.venta == i._id ">
+                                    <a [routerLink]="['/productos/', item.producto.slug]" style="min-width:100px;">
+                                        <img [src]=" url + '/obtener_portada/'+ item.producto.portada" width="80" alt="Product thumb" style="border-radius: 50%;">
+
+
+                                        <span>{{  item.producto.titulo }}</span>
+
+                                        <span class="font-size-sm text-muted text-nowrap px-2">
+
+
+                                      <i class="cxi-clock"></i>
+                                      {{item.createdAt | date }}
+                                    </span>
+                                        <span>{{item.subtotal}}€</span>
+                                        <!-- <span class="badge bg-info p-1 text-white" *ngIf="item.estado">{{item.estado}}</span> -->
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <a [routerLink]="['/cuenta/detail_orders', item.venta ]" class="btn btn-outline-primary" type="button">Ver detalles</a>
+                                            <a [routerLink]="['/dev/producto', item._id]" class="btn btn-outline-danger ml-2" type="button">Devolver</a>
+                                        </div>
+
+                                    </a>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+
+
+                    <!-- Order -->
+                    <!-- <ng-container *ngIf="orders!= undefined">
+                        <div class="card border-bottom" *ngFor="let item of orders | paginate: { itemsPerPage: pageSize, currentPage: p }">
+                            <div class="card-header accordion-heading py-1">
+                                <a [routerLink]="['/cuenta/detail_orders', item._id ]" class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="false">
+                                    <span class="pr-2"># {{item._id.toUpperCase()}}</span>
+                                    <span class="font-size-sm text-muted text-nowrap px-2">
+                      <i class="cxi-clock font-size-base align-middle mt-n1 mr-1"></i>
+                      {{item.createdAt | date }}
+                    </span>
+                                    <span class="badge badge-info">{{item.estado}}</span>
+                                    <span class="text-dark pl-1">{{item.subtotal}} €</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </ng-container> -->
+                    <ng-container *ngIf="orders.length==0">
+                        <div class="card border-bottom">
+                            <div class="card-header accordion-heading py-1">
+                                <a href="#order-2" class="d-flex flex-wrap justify-content-between py-3">
+                                    <span class="text-center">No tienes órdenes realizadas</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </ng-container>
+
+
+
+
+                </div>
+
+                <div class="row" *ngIf="cargando">
+                    <div class="spinner-grow" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+
+                </div>
+
+                <!-- Toolbar + Pagination -->
+                <div class="d-flex align-items-center pt-md-4">
+
+                    <div class="form-inline flex-nowrap d-none d-sm-flex mr-3 mr-xl-5 pt-1">
+                        <label for="pager-bottom" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-md-block">Ver</label>
+                        <select id="pager-bottom" class="custom-select" name="pageSize" [(ngModel)]="pageSize">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="40">40</option>
+              </select>
+                        <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-md-block">Órdenes por página</span>
+
+                    </div>
+                    <div class="form-inline flex-nowrap d-none d-sm-flex mr-3 mr-xl-5 pt-1">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+</main>
+
+<app-footer></app-footer>

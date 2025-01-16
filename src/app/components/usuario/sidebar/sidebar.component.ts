@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ClienteService } from 'src/app/service/cliente.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class SidebarComponent {
   public cliente_sesion: any = {};
   public token;
 
-  constructor(private _clienteService: ClienteService){
+  constructor(private _clienteService: ClienteService, private _router:Router){
 
        this.id = localStorage.getItem('_id');
        this.token = localStorage.getItem('token');
@@ -52,5 +53,11 @@ export class SidebarComponent {
            }
          )
        }
+  }
+  logout(){
+    //window.location.reload();
+    localStorage.clear();
+    this._router.navigate(['/'])
+
   }
 }

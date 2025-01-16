@@ -247,18 +247,26 @@
                                     <a [routerLink]="['/productos/', item.slug]" class="card-img-top">
                                         <img [src]=" url + '/obtener_portada/'+ item.portada" alt="Product image">
                                     </a>
+
+
                                     <div class="card-product-widgets-top">
                                         <div class="star-rating ml-auto">
-                                            <i class="sr-star cxi-star-filled active"></i>
-                                            <i class="sr-star cxi-star-filled active"></i>
-                                            <i class="sr-star cxi-star-filled active"></i>
-                                            <i class="sr-star cxi-star-filled active"></i>
-                                            <i class="sr-star cxi-star-filled active"></i>
+
+                                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=1 }"></i>
+                                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=2 }"></i>
+                                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=3 }"></i>
+                                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=4 }"></i>
+                                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=5 }"></i>
                                         </div>
                                     </div>
+
                                     <div class="card-product-widgets-top">
-                                        <span class="badge product-badge bg-danger text-white" *ngIf="descuento != undefined">-{{ descuento.descuento}}%</span>
-                                        <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
+                                        <span class="badge product-badge bg-danger text-white" *ngIf="descuento != undefined && item.descuento != undefined">-{{ descuento.descuento}}%</span>
+                                        <span class="badge product-badge bg-danger text-white" *ngIf="descuento != undefined && item.descuento == undefined">-{{ descuento.descuento}}%</span>
+
+                                    </div>
+                                    <div class="card-product-widgets-top">
+                                        <span class="badge product-badge bg-danger text-white" *ngIf="item.descuento != undefined && descuento == undefined">-{{ item.descuento}}%</span>
                                     </div>
                                 </div>
                                 <div class="card-body pb-2">
@@ -266,15 +274,30 @@
                                         <a [routerLink]="['/productos/', item.slug]" class="nav-link">{{item.titulo}}</a>
                                     </h3>
                                     <!-- si no hay descuento aparece el precio original -->
-                                    <div class="d-flex align-items-center" *ngIf="descuento == undefined">
+                                    <div class="d-flex align-items-center" *ngIf="descuento == undefined && item.descuento == undefined">
                                         <span class="h5 d-inline-block mb-0">{{item.precio}}€</span>
                                     </div>
-                                    <!-- si  hay descuento  -->
-                                    <div class="d-flex align-items-center" *ngIf="descuento != undefined">
+
+                                    <!-- si  hay descuento  generales de todos los productos-->
+                                    <div class="d-flex align-items-center" *ngIf="descuento != undefined && item.descuento != undefined">
                                         <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
                                         <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:descuento.descuento}}€</span>
                                         <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
                                     </div>
+                                    <div class="d-flex align-items-center" *ngIf="descuento != undefined && item.descuento == undefined">
+                                        <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
+                                        <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:descuento.descuento}}€</span>
+                                        <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
+                                    </div>
+                                    <!-- si  hay descuento único del producto  -->
+
+                                    <div class="d-flex align-items-center" *ngIf="item.descuento != undefined && descuento == undefined">
+                                        <!-- se utiliza el pipe descuentos para el calculo del porcentaje del descuento -->
+                                        <span class="h5 d-inline-block mb-0 text-danger">{{item.precio | descuentos:item.descuento}}€</span>
+                                        <del class="d-inline-block ms-2 ps-1 text-muted">{{item.precio}}€</del>
+                                    </div>
+
+
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-flex align-items-center mb-2 pb-1">

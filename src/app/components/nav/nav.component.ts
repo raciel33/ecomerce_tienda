@@ -132,7 +132,7 @@ get_carrito_cliente(){
     this._clienteService.get_carrito_cliente( this.cliente_sesion._id).subscribe(
       (resp: any) =>{
         this.carrito = resp.data
-      //  console.log(this.carrito);
+        console.log(this.carrito);
 
       //total del carrito
       this.calcular_carrito()
@@ -207,4 +207,7 @@ get_carrito_cliente(){
       }
     )
   }
+
+
+
 }

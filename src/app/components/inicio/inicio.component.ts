@@ -18,64 +18,39 @@ export class InicioComponent {
   public categoria : Array<any>= [];
 
 
+
   public url;
+
 
   constructor( private _router: ActivatedRoute,
     private _guetsService: GuestService, private _clienteService: ClienteService){
       this.url = GLOBAL.url
 
+
       this._clienteService.obtener_config_public().subscribe(
         (resp:any)=>{
+               console.log(resp);
 
           resp.data.categorias.forEach((element:any) => {
-               if (element.titulo == 'Smartphones') {
+               if (element.titulo == 'Cojines') {
                     this.categoria.push({
                       titulo: element.titulo,
-                      portada: 'assets/img/ecommerce/home/categories/portadaSmartphone.jpg'
+                      portada: 'assets/img/ecommerce/home/categories/cojines.jpg'
                     })
                }
-               else if( element.titulo == 'TV'){
+               else if( element.titulo == 'Mantas'){
                 this.categoria.push({
                   titulo: element.titulo,
-                  portada: 'assets/img/ecommerce/home/categories/tv.jpg'
+                  portada: 'assets/img/ecommerce/home/categories/mantas.jpg'
                 })
                }
-               else if( element.titulo == 'Altavoces'){
+               else if( element.titulo == 'Edredones'){
                 this.categoria.push({
                   titulo: element.titulo,
-                  portada: 'assets/img/ecommerce/home/categories/altavoz.jpg'
+                  portada: 'assets/img/ecommerce/home/categories/edredones.jpg'
                 })
                }
-               else if( element.titulo == 'Portátiles'){
-                this.categoria.push({
-                  titulo: element.titulo,
-                  portada: 'assets/img/ecommerce/home/categories/portatil.jpg'
-                })
-               }
-               else if( element.titulo == 'Electrodomésticos'){
-                this.categoria.push({
-                  titulo: element.titulo,
-                  portada: 'assets/img/ecommerce/home/categories/electrodomestico.jpg'
-                })
-               }
-               else if( element.titulo == 'Accesorios'){
-                this.categoria.push({
-                  titulo: element.titulo,
-                  portada: 'assets/img/ecommerce/home/categories/accesorios.jpg'
-                })
-               }
-               else if( element.titulo == 'Auriculares'){
-                this.categoria.push({
-                  titulo: element.titulo,
-                  portada: 'assets/img/ecommerce/home/categories/auriculares.jpg'
-                })
-               }
-               else if( element.titulo == 'Consolas'){
-                this.categoria.push({
-                  titulo: element.titulo,
-                  portada: 'assets/img/ecommerce/home/categories/consolas.jpg'
-                })
-               }
+
 
 
 
@@ -88,7 +63,7 @@ export class InicioComponent {
         }
       )
 
-      console.log(this.categoria);
+     //console.log(this.categoria);
 
 
  }
@@ -252,6 +227,13 @@ export class InicioComponent {
       (resp: any ) =>{
       //  console.log(resp);
           this.ultimos_prod = resp.data
+
+          this.ultimos_prod.forEach((element: any) => {
+
+            if(element.descuento == 0){
+              element.descuento = undefined
+            }
+          });
       }, err =>{
         console.log(err);
 
@@ -264,10 +246,20 @@ export class InicioComponent {
      (resp: any ) =>{
       // console.log(resp);
          this.mas_vendidos = resp.data
+
+         this.mas_vendidos.forEach((element: any) => {
+
+          if(element.descuento == 0){
+            element.descuento = undefined
+          }
+        });
      }, err =>{
        console.log(err);
 
      }
     )
  }
+
+
+
 }

@@ -30,6 +30,34 @@ export class DetailProductoComponent implements OnInit{
   public cargando = false;
   public socket = io('http://localhost:3005')
 
+  public reviews: Array<any> = [];
+
+  //contador de estrellas
+  public count_five_start = 0;
+  public count_four_start = 0;
+  public count_three_start = 0;
+  public count_two_start = 0;
+  public count_one_start = 0;
+
+  //calculo del porcentaje en base a las reseñas
+  public total_puntos = 0;
+  public max_puntos = 0;
+  public porcent_rating = 0;
+  public puntos_rating = 0;
+
+
+  //para el progressBar de las reviews
+  public cinco_porcent = 0;
+  public cuatro_porcent = 0;
+  public tres_porcent = 0;
+  public dos_porcent = 0;
+  public uno_porcent = 0;
+
+
+ //para la paginacion
+ public p: number = 1;
+ public pageSize = 5;
+
 
 
   constructor( private _route: ActivatedRoute, private _gusestService: GuestService,
@@ -51,7 +79,7 @@ export class DetailProductoComponent implements OnInit{
     this._gusestService.listar_productos_recomendados_publico( this.producto.categoria).subscribe(
       (resp:any)=>{
         this.prod_recomendado = resp.data;
-        console.log(this.prod_recomendado);
+       //console.log(this.prod_recomendado);
 
       },
       err=>{
@@ -142,15 +170,20 @@ export class DetailProductoComponent implements OnInit{
       } else {
         this.descuento = undefined
       }
+
+      this.listar_reviews_producto_publico();
+
     },
     err=>{
 
     }
+
   )
 
 
-
   }
+
+
 
 
   agregarProducto(){
@@ -224,6 +257,72 @@ export class DetailProductoComponent implements OnInit{
       })
     }
   }
+
+
+  listar_reviews_producto_publico(){
+
+    this._gusestService.listar_reviews_producto_publico( this.producto._id ).subscribe(
+      resp=>{
+        this.reviews = resp.data
+
+        //Para contar las reseñas por el numero de estrellas
+
+        resp.data.forEach((element: any) => {
+
+          if(element.starts == 5){
+            this.count_five_start  += 1 ;
+          }
+          else if( element.starts == 4){
+            this.count_four_start +=1;
+
+          }
+          else if( element.starts == 3){
+            this.count_three_start +=1;
+
+          }
+          else if( element.starts == 2){
+            this.count_two_start +=1;
+
+          }
+          else if( element.starts == 1){
+            this.count_one_start +=1;
+
+          }
+        });
+
+        //calculo del porcentaje por cada puntuacion de las reseñas
+
+        this.cinco_porcent = ( this.count_five_start *100 )/resp.data.length;
+        this.cuatro_porcent = ( this.count_four_start *100 )/resp.data.length
+        this.tres_porcent = ( this.count_three_start *100 )/resp.data.length
+        this.dos_porcent = ( this.count_two_start *100 )/resp.data.length
+        this.uno_porcent = ( this.count_one_start *100 )/resp.data.length
+
+        //calculo del valor de las reseñas
+
+        let cinco_puntos = this.count_five_start * 5;
+        let cuatro_puntos = this.count_four_start * 4;
+        let tres_puntos = this.count_three_start * 3;
+        let dos_puntos = this.count_two_start * 2;
+        let un_punto = this.count_one_start * 1;
+
+        this.total_puntos = cinco_puntos + cuatro_puntos + tres_puntos + dos_puntos + un_punto
+
+        this.max_puntos = resp.data.length * 5;
+
+        //porcentaje total de las reseñas
+        this.porcent_rating = ( this.total_puntos * 100 )/this.max_puntos
+
+        //puntuacion total de las reseñas
+        this.puntos_rating = ( this.porcent_rating * 5)/100
+
+       // console.log(this.puntos_rating);
+      },err=>{
+
+      }
+    )
+  }
+
 }
 
 
